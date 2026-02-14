@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Valentine's Day</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --rose: #c4586e;
+      --rose-light: #e8a0b0;
+      --blush: #fdf2f4;
+      --cream: #fefbf7;
+      --ink: #3a2a2a;
+      --ink-light: #6b5555;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--cream);
+      color: var(--ink);
+      font-family: 'Lora', Georgia, serif;
+      line-height: 1.8;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Floating hearts background */
+    .hearts-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .heart-float {
+      position: absolute;
+      opacity: 0;
+      animation: floatUp linear infinite;
+      font-size: 1.2rem;
+      color: var(--rose-light);
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 0;
+        transform: translateY(100vh) rotate(0deg) scale(0.5);
+      }
+      10% {
+        opacity: 0.15;
+      }
+      90% {
+        opacity: 0.15;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-10vh) rotate(360deg) scale(1);
+      }
+    }
+
+    /* Main container */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    /* Opening */
+    .opening {
+      text-align: center;
+      padding: 4rem 0 3rem;
+      animation: fadeInDown 1.2s ease-out;
+    }
+
+    .opening .heart-icon {
+      font-size: 2.5rem;
+      display: inline-block;
+      animation: pulse 1.5s ease-in-out infinite;
+      margin-bottom: 1.5rem;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    .opening h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 600;
+      font-size: 2.6rem;
+      color: var(--rose);
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.02em;
+    }
+
+    .opening .subtitle {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--ink-light);
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Divider */
+    .divider {
+      text-align: center;
+      margin: 2.5rem 0;
+      color: var(--rose-light);
+      font-size: 1.1rem;
+      letter-spacing: 0.5em;
+      user-select: none;
+    }
+
+    /* Letter */
+    .letter {
+      background: white;
+      border-radius: 12px;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 2px 20px rgba(196, 88, 110, 0.08);
+      border: 1px solid rgba(196, 88, 110, 0.1);
+      animation: fadeIn 1.5s ease-out 0.3s both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .letter .greeting {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: 1.35rem;
+      color: var(--rose);
+      margin-bottom: 1.8rem;
+    }
+
+    .letter p {
+      margin-bottom: 1.4rem;
+      font-size: 1.05rem;
+      color: var(--ink);
+    }
+
+    .letter p:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .letter .apology {
+      background: var(--blush);
+      border-left: 3px solid var(--rose-light);
+      padding: 1.2rem 1.5rem;
+      border-radius: 0 8px 8px 0;
+      margin: 2rem 0;
+      font-style: italic;
+      color: var(--ink-light);
+    }
+
+    .letter .sign-off {
+      margin-top: 2.5rem;
+      text-align: right;
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    .letter .sign-off .closing {
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--ink-light);
+      margin-bottom: 0.3rem;
+    }
+
+    .letter .sign-off .name {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--rose);
+    }
+
+    /* Photo Gallery */
+    .gallery {
+      margin-top: 2.5rem;
+    }
+
+    .gallery-title {
+      text-align: center;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--rose);
+      margin-bottom: 1.5rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .photo-frame {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 3px 15px rgba(196, 88, 110, 0.12);
+      border: 3px solid white;
+      aspect-ratio: 1;
+      opacity: 0;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .photo-frame:hover {
+      box-shadow: 0 6px 25px rgba(196, 88, 110, 0.25);
+      z-index: 2;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-frame .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--blush), var(--rose-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: white;
+    }
+
+    /* Gentle floating */
+    @keyframes gentleFloat {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-5px);
+      }
+    }
+
+    .photo-frame.floating {
+      animation: gentleFloat 3.5s ease-in-out infinite;
+    }
+
+    .photo-frame:nth-child(1).floating { animation-delay: 0s; }
+    .photo-frame:nth-child(2).floating { animation-delay: 0.6s; }
+    .photo-frame:nth-child(3).floating { animation-delay: 1.2s; }
+    .photo-frame:nth-child(4).floating { animation-delay: 1.8s; }
+    .photo-frame:nth-child(5).floating { animation-delay: 0.4s; }
+    .photo-frame:nth-child(6).floating { animation-delay: 1.4s; }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(58, 42, 42, 0.85);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 85vh;
+      border-radius: 12px;
+      box-shadow: 0 10px 50px rgba(0,0,0,0.4);
+      transform: scale(0.8);
+      transition: transform 0.3s ease;
+    }
+
+    .lightbox.active img {
+      transform: scale(1);
+    }
+
+    @media (max-width: 600px) {
+      .gallery-grid { gap: 0.6rem; }
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 3rem;
+      animation: fadeIn 1.5s ease-out 0.8s both;
+    }
+
+    .footer .date {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--ink-light);
+    }
+
+    .footer .hearts-row {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      letter-spacing: 0.3em;
+      color: var(--rose-light);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container { padding: 2rem 1rem 4rem; }
+      .opening h1 { font-size: 2rem; }
+      .letter { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating hearts background -->
+  <div class="hearts-bg" id="heartsBg"></div>
+
+  <div class="container">
+
+    <div class="opening">
+      <div class="heart-icon">&hearts;</div>
+      <h1>Happy Valentine's Day</h1>
+      <p class="subtitle">A letter for you, my love</p>
+    </div>
+
+    <div class="divider">&middot; &middot; &middot; &hearts; &middot; &middot; &middot;</div>
+
+    <div class="letter">
+      <p class="greeting">My Love,</p>
+
+      <p>
+        Happy Valentine's Day! I know this is a bit rushed, but I thought that I should at least give you a letter and ask formally if you would like to be my Valentine's (which I'm sure you will, hehe).
+      </p>
+
+      <p>
+        It's been 2 years now since we started dating, and I must say that my life has been so, so wonderful with you here. Despite a few road bumps here and there (like your temper, your pace of life that somehow even exceeds mine, and me failing your high expectations sometimes), I just want to appreciate the fact that learning and growing alongside you has been very valuable. At the start, I said that I would accept all of your flaws, and I will still do so, always :)
+      </p>
+
+      <div class="apology">
+        I'm so sorry for the lack of gifts this year :( I'm still bad at planning surprises, and I thought that you'd get mad if I bought the wrong thing. Don't worry, I won't fail again next time; I'll just buy whatever I want to give to you :)
+      </div>
+
+      <p>
+        As for this time, would you at least be my valentine's?
+      </p>
+
+      <div class="sign-off">
+        <p class="closing">Your baby,</p>
+        <p class="name">Pooh &hearts;</p>
+      </div>
+    </div>
+
+    <!-- Photo Gallery -->
+    <div class="gallery">
+      <div class="divider">&middot; &middot; &middot; &hearts; &middot; &middot; &middot;</div>
+      <p class="gallery-title">Our memories together &hearts;</p>
+      <div class="gallery-grid" id="galleryGrid">
+        <div class="photo-frame"><img src="images/1000048242.JPG" alt="Our memory 1" /></div>
+        <div class="photo-frame"><img src="images/1000049840.JPG" alt="Our memory 2" /></div>
+        <div class="photo-frame"><img src="images/1000053326.JPG" alt="Our memory 3" /></div>
+        <div class="photo-frame"><img src="images/1000057575.JPG" alt="Our memory 4" /></div>
+        <div class="photo-frame"><img src="images/IMG_7241.jpg" alt="Our memory 5" /></div>
+        <div class="photo-frame"><img src="images/IMG_8733.jpg" alt="Our memory 6" /></div>
+
+      </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <img src="" alt="Photo" id="lightboxImg" />
+    </div>
+
+    <div class="footer">
+      <p class="date">February 14, 2026</p>
+      <div class="hearts-row">&hearts; &hearts; &hearts;</div>
+    </div>
+
+  </div>
+
+  <script>
+    // Generate floating hearts background
+    const bg = document.getElementById('heartsBg');
+    const heartChars = ['♥', '♡', '❤'];
+    for (let i = 0; i < 20; i++) {
+      const span = document.createElement('span');
+      span.classList.add('heart-float');
+      span.textContent = heartChars[Math.floor(Math.random() * heartChars.length)];
+      span.style.left = Math.random() * 100 + '%';
+      span.style.fontSize = (0.8 + Math.random() * 1.2) + 'rem';
+      span.style.animationDuration = (8 + Math.random() * 12) + 's';
+      span.style.animationDelay = (Math.random() * 15) + 's';
+      bg.appendChild(span);
+    }
+
+    // Photo gallery — pop-in on scroll
+    const frames = document.querySelectorAll('.photo-frame');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          el.style.opacity = '1';
+          el.classList.add('floating');
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    frames.forEach(f => observer.observe(f));
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+
+    frames.forEach(frame => {
+      frame.addEventListener('click', () => {
+        const img = frame.querySelector('img');
+        if (img) {
+          lightboxImg.src = img.src;
+          lightbox.classList.add('active');
+        }
+      });
+    });
+
+    lightbox.addEventListener('click', () => {
+      lightbox.classList.remove('active');
+    });
+  </script>
+
+</body>
+</html>
